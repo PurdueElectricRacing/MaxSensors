@@ -13,7 +13,6 @@
 
 typedef struct {
 	uint8_t pin; // Pin on the MAX Chip
-	uint8_t secondPin; //2nd Pin on MAX Chip
 	MAX11615* max; //When were using both chips this can define which one is being used
 	uint16_t value; // holds the value of sensor is updated by calling the function below
 	uint8_t (*read)(struct sensor*); //Should be called to get sensor value
