@@ -29,9 +29,9 @@ uint8_t INLINETEMP_Read(sensor* inlineT)
 	 * No idea if it works but you need resistance to get the temperature value
 	 */
 	vOut = (adcValue/2048) * 5.0;
-	buffer = (5/vOut) - 1;
-	resistance = knownR * buffer;
-
+	buffer = (5/vOut)-1
+	resistance = knownR/buffer;
+	//r = 10k/((5/v)-1)
 	//Temperature = -26.689*ln(x) + 272.279
 	inlineT->value = -26.689 * log(resistance) + 272.279;
 	return status;
