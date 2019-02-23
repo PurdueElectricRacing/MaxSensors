@@ -8,7 +8,7 @@
 #ifndef MAXSENSOR_H_
 #define MAXSENSOR_H_
 
-#include "MAX11615.h"
+#include "max1161x.h"
 
 
 typedef struct {
