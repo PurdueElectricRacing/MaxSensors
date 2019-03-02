@@ -12,8 +12,9 @@
  * @brief      Calculates the temperature of the Inline Flow Temp Sensor
  * @param      *tempSensor, Pointer to a sensor struct that defines the parameters of the specific sensor being read.
  */
-uint8_t maxsensor_Inlineflow_Read(void * tempSensor)
+uint8_t maxsensor_Inlineflow_Read(void * tempSensor_temp)
 {
+  sensor_t * tempSensor = (sensor_t *) tempSensor_temp;
   uint8_t status;
   uint16_t adcValue;
   float32_t vOut;
@@ -27,7 +28,7 @@ uint8_t maxsensor_Inlineflow_Read(void * tempSensor)
   
   //Line of best fit calculated off of data in datasheet
   //Temperature = -26.689*ln(Resistance) + 272.279
-  tmepSensor->value = -26.689 * log(resistance) + 272.279;
+  tempSensor->value = -26.689 * log(resistance) + 272.279;
   
   return status;
 }
@@ -36,9 +37,9 @@ uint8_t maxsensor_Inlineflow_Read(void * tempSensor)
  * @brief      Calculates the distance of the shock pot between 0-100mm
  * @param      *strainSensor, Pointer to a sensor struct that defines the parameters of the specific sensor being read.
  */
-uint8_t maxsensor_Straingauge_Read(void * strainSensor)
+uint8_t maxsensor_Straingauge_Read(void * strainSensor_temp)
 {
-  //using shock pot with 100mm travel range
+  sensor_t * strainSensor = (sensor_t *) tempSensor_temp;
   uint8_t status;
   uint8_t vOut;
   uint8_t range = 100; //maximum travel distance of shock Pot 
