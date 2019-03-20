@@ -17,19 +17,19 @@ uint8_t maxsensor_Inlineflow_Read(void * tempSensor_temp)
   sensor_t * tempSensor = (sensor_t *) tempSensor_temp;
   uint8_t status;
   uint16_t adcValue;
-  float32_t vOut;
-  float32_t resistance;
-  uint16_t knownR = 10000; //Resistance of resistor in front of the flow Sensor
+  float vOut;
+  float resistance;
+  uint16_t knownR = FLOW_SPEED_RESISTOR_OHM; //Resistance of resistor in front of the flow Sensor
 
   status = MAX11615_ADC_Read(tempSensor->max, tempSensor->pin, adcValue);
 
-  vOut = (adcvalue / 4095.0) * 4.73;
-  resistance = (-knowR * vOut) / (vOut - 4.73);
-  
+  vOut = (adcValue / 4095.0) * 4.73;
+  resistance = (-knownR * vOut) / (vOut - 4.73);
+
   //Line of best fit calculated off of data in datasheet
   //Temperature = -26.689*ln(Resistance) + 272.279
   tempSensor->value = -26.689 * log(resistance) + 272.279;
-  
+
   return status;
 }
 
@@ -39,11 +39,11 @@ uint8_t maxsensor_Inlineflow_Read(void * tempSensor_temp)
  */
 uint8_t maxsensor_Straingauge_Read(void * strainSensor_temp)
 {
-  sensor_t * strainSensor = (sensor_t *) tempSensor_temp;
+  sensor_t * strainSensor = (sensor_t *) strainSensor_temp;
   uint8_t status;
-  uint8_t vOut;
-  uint8_t range = 100; //maximum travel distance of shock Pot 
-  
+  uint16_t adcValue;
+  uint8_t range = 100; //maximum travel distance of shock Pot
+
   status = MAX11615_ADC_Read(strainSensor->max, strainSensor->pin, adcValue);
   strainSensor->value = (adcValue/4095.0) * range;
 
