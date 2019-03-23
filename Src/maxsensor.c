@@ -42,7 +42,7 @@ uint8_t maxsensor_Straingauge_Read(void * strainSensor_temp)
   sensor_t * strainSensor = (sensor_t *) strainSensor_temp;
   uint8_t status;
   uint16_t adcValue;
-  uint8_t range = 100; //maximum travel distance of shock Pot
+  uint8_t range =  SHOCK_POT_TRAVEL_LENGTH; //maximum travel distance of shock Pot in millimeters
 
   status = max1161x_ADC_Read(strainSensor->max, strainSensor->pin, &adcValue);
   strainSensor->value = (adcValue/4095.0) * range;

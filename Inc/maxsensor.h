@@ -12,7 +12,7 @@
 #include "daq2.h"
 
 #define FLOW_SPEED_RESISTOR_OHM  10000
-
+#define SHOCK_POT_TRAVEL_LENGTH  75
 
 typedef struct {
 	uint8_t pin; 					// Pin on the MAX Chip
